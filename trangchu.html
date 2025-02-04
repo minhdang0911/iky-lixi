@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title id="titleWeb">Lì xì năm 2025 IKYY</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Francois+One&amp;display=swap'>
+    <link rel='stylesheet' href='css/sweetalert.css'>
+    <link rel='stylesheet' href='css/custom.css'>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="./img/logocompany.png" rel="shortcut icon" type="image/x-icon">
+    <style>
+        .swal2-html-container {
+            color: aliceblue;
+        }
+
+        html,
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .red-envelope {
+            width: 200px;
+            height: 300px;
+            background: url('img/red-envelope.png') no-repeat center center;
+            background-size: cover;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .shake {
+            animation: shake 0.5s;
+            animation-iteration-count: 12; /* Lắc mạnh hơn */
+        }
+
+        @keyframes shake {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(10deg); }
+            50% { transform: translate(-50%, -50%) rotate(0deg); }
+            75% { transform: translate(-50%, -50%) rotate(-10deg); }
+            100% { transform: translate(-50%, -50%) rotate(0deg); }
+        }
+
+        .responsive2 {
+            position: fixed;
+            z-index: 99;
+            top: 0px;
+            right: 0px;
+        }
+
+        .responsive3 {
+            position: fixed;
+            z-index: 99;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .money-image {
+            animation: moveMoney 3s forwards;
+        }
+
+        @keyframes moveMoney {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -150px) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -200px) rotate(720deg);
+            }
+        }
+
+        .clap-message {
+            animation: moveMoney 3s forwards;
+        }
+
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 70px;
+            padding: 15px;
+            font-size: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body onload="nhappass()">
+    <div class="pyro">
+        <div class="before" style="z-index: 9999"></div>
+        <div class="after"></div>
+    </div>
+
+    <div class="topheader">
+        <img class="responsive" id="myImg" onclick="changeSetting()" style="z-index:99;top:50px;height:150px;" src="https://img.pikbest.com/png-images/20241002/happy-new-year-2025-banner-black-and-white-background-vector-happy_10923211.png!bw700" />
+    </div>
+
+    <div id="caidat">
+        <img id="popup" src="img/popup.jpg" />
+        <div class="sotiendalixi" id="sotiendalixi"></div>
+        <div class="lichsulixi" id="lichsulixi"></div>
+        <div class="buttontatpopup" onClick="tatpopup()"></div>
+        <div class="buttonlammoi" id="lammoi" onClick="lammoi()"></div>
+        <div class="nenpopup"></div>
+    </div>
+
+    <div id="popupnhantien">
+        <img id="popuptien" src="img/popupnhantien.png" />
+        <div class="sotienpopupnhantien" id="sotienpopupnhantien"><img id="xuatsotienpopup"></div>
+        <div class="lammoipopupnhantien" id="lammoi" onClick="lammoi()"></div>
+        <div class="nenpopup"></div>
+    </div>
+
+    <div class="red-envelope" onclick="openRedEnvelope()">
+        <img id="baoLiXi" src="img/baolixi.PNG" class="bao-li-xi" onclick="nhantien()" />
+    </div>
+
+    <img class="responsive2" src="img/hea1.png" />
+    <div style="position:fixed;z-index:99;bottom:-50px;left:0;width:100%;height:500px;background:url(img/bot1.png) repeat-x bottom left;"></div>
+    <img style="width: 250px;height: 250px;" class="responsive3" src="img/snake.png" />
+    <div class="nutcaidat" style="position:fixed;bottom:0px;left:20px" onClick="mopopup()"></div>
+
+    <div style="position:fixed;z-index:999;top:37px;left:20px;text-shadow: 2px 2px 5px #f7ff29;color: #f2f4be;" id="xuatluotquay">Lượt lì xì:</div>
+
+    <img style="position:fixed;z-index:999;top:105px;left:9px" id="xuatsotien">
+
+    <audio id="votay"><source src="sound/votay.mp3" type="audio/mpeg"></audio>
+    <audio id="matluot"><source src="sound/matluot.mp3" type="audio/mpeg"></audio>
+    <audio id="bgMusic" loop>
+        <source src="sound/nhuhoamuaxuan-wrenEvans.mp3" type="audio/mp3" />
+    </audio>
+    <button class="music-toggle">🔊</button>
+
+</body>
+<script>
+    var matkhau = "mycode";
+    var solanquay = 26;
+    var demnhantien = 0; // Đếm số lần click vào nút nhận tiền
+    var lichsulixi = "";
+    var tongtienlixi = 0;
+    document.getElementById("xuatluotquay").innerHTML = `Lượt lì xì: ${solanquay}`;
+    var votay = document.getElementById("votay");
+
+    var prizes = [
+        ...Array(5).fill({ amount: 20000, message: "Bạn nhận được 20.000 VNĐ", img: "img/20nghin.png" }),
+        ...Array(6).fill({ amount: 30000, message: "Bạn nhận được 30.000 VNĐ", img: ["img/10nghin.jpg", "img/20nghin.png"] }),
+        ...Array(8).fill({ amount: 50000, message: "Bạn nhận được 50.000 VNĐ", img: "img/50nghin.jpg" }),
+        ...Array(3).fill({ amount: 100000, message: "Bạn nhận được 100.000 VNĐ", img: "img/100nghin.jpg" }),
+        ...Array(4).fill({ amount: 0, message: "Bạn nhận được tràn pháo tay", img: "" })
+    ];
+
+    // Shuffle prizes array
+    prizes = prizes.sort(() => Math.random() - 0.5);
+
+    function nhappass() {
+        return;
+        Swal.fire({
+            title: "Lì xì bị khoá!",
+            text: "Nhập mật khẩu để mở khoá:",
+            input: "password",
+            showCancelButton: false,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+            inputPlaceholder: "Nhập mật khẩu..."
+        }).then((inputValue) => {
+            if (inputValue.value !== matkhau) {
+                Swal.fire("Mật khẩu sai, vui lòng nhập lại!");
+            } else {
+                Swal.fire("Mở khoá thành công!", "Hãy đưa chiếc điện thoại cho người muốn nhận lì xì nào!", "success");
+            }
+        });
+    }
+
+    function mopopup() {
+        document.getElementById("caidat").style.display = "block";
+    }
+
+    function tatpopup() {
+        document.getElementById("caidat").style.display = "none";
+    }
+
+    function lammoi() {
+        Swal.fire({
+            title: "Làm mới lì xì!",
+            text: "Làm mới sẽ xoá hết các vòng quay còn lại. \nLịch sử và tổng tiền lì xì vẫn giữ nguyên. \nChú ý nếu tải lại trang sẽ làm mất lịch sử và tổng tiền lì xì\nNhập mật khẩu để tiếp tục:",
+            input: "password",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+            inputPlaceholder: "Nhập mật khẩu..."
+        }).then((inputValue) => {
+            if (inputValue.value !== matkhau) {
+                Swal.fire("Mật khẩu sai, vui lòng nhập lại!");
+            } else {
+                Swal.fire("Làm mới thành công!", "Hãy đưa chiếc điện thoại cho người muốn nhận lì xì nào!", "success");
+                document.getElementById("popupnhantien").style.display = "none";
+                document.getElementById("xuatluotquay").innerHTML = solanquay;
+            }
+        });
+    }
+
+    function openRedEnvelope() {
+        var redEnvelope = document.querySelector('.red-envelope');
+        redEnvelope.classList.add('shake'); // Thêm lớp lắc
+
+        setTimeout(() => {
+            redEnvelope.classList.remove('shake'); // Xóa lớp lắc sau 3 giây
+            // Hiển thị popup sau khi lắc xong
+            showPopup();
+        }, 3000);
+    }
+
+    function showPopup() {
+        // Check if there are any spins left
+        if (solanquay > 0) {
+            var prize = prizes.pop(); // Get the next prize
+            console.log('Prize:', prize); // Log the prize details for debugging
+            tongtienlixi += prize.amount;
+            demnhantien++;
+            lichsulixi += "Người " + demnhantien + " : " + prize.message + "<br/>";
+            document.getElementById("sotiendalixi").innerHTML = tongtienlixi + ".000 VNĐ";
+            document.getElementById("lichsulixi").innerHTML = lichsulixi;
+
+            if (prize.amount === 0) {
+                votay.play();
+                // Hiển thị thông báo "tràn pháo tay"
+                var clapElement = document.createElement("div");
+                clapElement.classList.add("clap-message");
+                clapElement.style.position = "fixed";
+                clapElement.style.top = "50%";
+                clapElement.style.left = "50%";
+                clapElement.style.transform = "translate(-50%, 50%)";
+                clapElement.style.zIndex = "1000";
+                clapElement.style.color = "white";
+                clapElement.style.fontSize = "24px";
+                clapElement.style.fontWeight = "bold";
+                clapElement.style.padding = "20px";
+                clapElement.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+                clapElement.style.borderRadius = "10px";
+                clapElement.innerText = "Một tràng pháo tay!";
+                document.body.appendChild(clapElement);
+
+                setTimeout(() => {
+                    clapElement.style.transform = "translate(-50%, -200px) rotate(720deg)";
+                }, 1500);
+
+                // Xóa thông báo sau khi người dùng bấm vào màn hình
+                document.body.addEventListener('click', () => {
+                    document.body.removeChild(clapElement);
+                }, { once: true });
+            } else if (Array.isArray(prize.img)) {
+                console.log('Displaying two images for 30 nghìn:', prize.img);
+                var imgElement1 = document.createElement("img");
+                imgElement1.src = prize.img[0];
+                imgElement1.classList.add("money-image");
+                imgElement1.style.width = "400px";
+                imgElement1.style.height = "120px";
+                imgElement1.style.position = "fixed";
+                imgElement1.style.zIndex = "1000";
+                imgElement1.style.top = "47%";
+                imgElement1.style.left = "39%";
+                imgElement1.style.transform = "translate(-50%, 50%)";
+                document.body.appendChild(imgElement1);
+
+                var imgElement2 = document.createElement("img");
+                imgElement2.src = prize.img[1];
+                imgElement2.classList.add("money-image");
+                imgElement2.style.width = "400px";
+                imgElement2.style.height = "120px";
+                imgElement2.style.position = "fixed";
+                imgElement2.style.zIndex = "1000";
+                imgElement2.style.top = "47%";
+                imgElement2.style.left = "60%";
+                imgElement2.style.transform = "translate(-50%, 50%)";
+                document.body.appendChild(imgElement2);
+                setTimeout(() => {
+                    imgElement1.style.transform = "translate(-50%, -200px) rotate(720deg)";
+                    imgElement2.style.transform = "translate(-50%, -200px) rotate(720deg)";
+                }, 1500);
+
+                // Xóa hình sau khi người dùng bấm vào màn hình
+                document.body.addEventListener('click', () => {
+                    document.body.removeChild(imgElement1);
+                    document.body.removeChild(imgElement2);
+                }, { once: true });
+            } else {
+                console.log('Displaying one image for amount:', prize.amount);
+                var imgElement = document.createElement("img");
+                imgElement.src = prize.img;
+                imgElement.classList.add("money-image");
+                imgElement.style.width = "400px";
+                imgElement.style.height = "120px";
+                imgElement.style.position = "fixed";
+                imgElement.style.zIndex = "1000";
+                imgElement.style.top = "43%";
+                imgElement.style.left = "50%";
+                imgElement.style.transform = "translate(-50%, 50%)";
+                document.body.appendChild(imgElement);
+
+
+                setTimeout(() => {
+                    imgElement.style.transform = "translate(-50%, -200px) rotate(720deg)";
+                }, 1500);
+
+                // Xóa hình sau khi người dùng bấm vào màn hình
+                document.body.addEventListener('click', () => {
+                    document.body.removeChild(imgElement);
+                }, { once: true });
+            }
+
+            // Decrease the number of spins left
+            solanquay--;
+            document.getElementById("xuatluotquay").innerHTML = `Lượt lì xì: ${solanquay}`;
+        } else {
+            matluot.play();
+            Swal.fire({
+                title: "<h3 style='color:white'>Hết lượt quay</h3>",
+                text: "Bạn đã hết lượt quay!",
+                imageUrl: "img/noo.gif",
+                imageWidth: 400,
+                imageHeight: 200,
+                imageAlt: "Custom image",
+                background: "#CD3333",
+            });
+        }
+    }
+
+    function handleMusic() {
+        const musicBtn = document.querySelector('.music-toggle');
+        const audio = document.getElementById('bgMusic');
+
+        musicBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                musicBtn.textContent = '🔊';
+            } else {
+                audio.pause();
+                musicBtn.textContent = '🔈';
+            }
+        });
+    }
+
+    handleMusic();
+</script>
+
+</html>
