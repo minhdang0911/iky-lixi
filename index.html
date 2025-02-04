@@ -33,6 +33,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            z-index: 1001; /* Ensure it's above other elements */
         }
 
         .shake {
@@ -41,11 +42,25 @@
         }
 
         @keyframes shake {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            25% { transform: translate(-50%, -50%) rotate(10deg); }
-            50% { transform: translate(-50%, -50%) rotate(0deg); }
-            75% { transform: translate(-50%, -50%) rotate(-10deg); }
-            100% { transform: translate(-50%, -50%) rotate(0deg); }
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(-50%, -50%) rotate(10deg);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            75% {
+                transform: translate(-50%, -50%) rotate(-10deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
         }
 
         .responsive2 {
@@ -71,10 +86,12 @@
                 opacity: 0;
                 transform: translate(-50%, 0) rotate(0deg);
             }
+
             50% {
                 opacity: 1;
                 transform: translate(-50%, -150px) rotate(0deg);
             }
+
             100% {
                 transform: translate(-50%, -200px) rotate(720deg);
             }
@@ -104,6 +121,64 @@
             transform: scale(1.1);
             background: rgba(0, 0, 0, 0.5);
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .red-envelope {
+                width: 150px;
+                height: 225px;
+            }
+
+            .money-image {
+                width: 200px;
+                height: auto;
+            }
+
+            .music-toggle {
+                width: 50px;
+                padding: 10px;
+                font-size: 20px;
+            }
+
+            .responsive2 {
+                width: 50px;
+                height: auto;
+            }
+
+            .responsive3 {
+                width: 100px;
+                height: auto;
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .red-envelope {
+                width: 100px;
+                height: 150px;
+            }
+
+            .money-image {
+                width: 150px;
+                height: auto;
+            }
+
+            .music-toggle {
+                width: 40px;
+                padding: 8px;
+                font-size: 18px;
+            }
+
+            .responsive2 {
+                width: 40px;
+                height: auto;
+            }
+
+            .responsive3 {
+                width: 80px;
+                height: auto;
+            }
+        }
     </style>
 </head>
 
@@ -114,6 +189,7 @@
     </div>
 
     <div class="topheader">
+        <img class="responsive" id="myImg" onclick="changeSetting()" style="z-index:99;top:50px;height:250px;width: 150px;" src="https://qms-admin.iky.vn/static/img/photos/iky-02.png" />
         <img class="responsive" id="myImg" onclick="changeSetting()" style="z-index:99;top:50px;height:150px;" src="https://img.pikbest.com/png-images/20241002/happy-new-year-2025-banner-black-and-white-background-vector-happy_10923211.png!bw700" />
     </div>
 
@@ -134,7 +210,7 @@
     </div>
 
     <div class="red-envelope" onclick="openRedEnvelope()">
-        <img id="baoLiXi" src="img/baolixi.PNG" class="bao-li-xi" onclick="nhantien()" />
+        <img id="baoLiXi" src="img/baolixi.PNG" class="bao-li-xi" />
     </div>
 
     <img class="responsive2" src="img/hea1.png" />
@@ -146,8 +222,12 @@
 
     <img style="position:fixed;z-index:999;top:105px;left:9px" id="xuatsotien">
 
-    <audio id="votay"><source src="sound/votay.mp3" type="audio/mpeg"></audio>
-    <audio id="matluot"><source src="sound/matluot.mp3" type="audio/mpeg"></audio>
+    <audio id="votay">
+        <source src="sound/votay.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="matluot">
+        <source src="sound/matluot.mp3" type="audio/mpeg">
+    </audio>
     <audio id="bgMusic" loop>
         <source src="sound/nhuhoamuaxuan-wrenEvans.mp3" type="audio/mp3" />
     </audio>
@@ -164,11 +244,31 @@
     var votay = document.getElementById("votay");
 
     var prizes = [
-        ...Array(5).fill({ amount: 20000, message: "Bạn nhận được 20.000 VNĐ", img: "img/20nghin.png" }),
-        ...Array(6).fill({ amount: 30000, message: "Bạn nhận được 30.000 VNĐ", img: ["img/10nghin.jpg", "img/20nghin.png"] }),
-        ...Array(8).fill({ amount: 50000, message: "Bạn nhận được 50.000 VNĐ", img: "img/50nghin.jpg" }),
-        ...Array(3).fill({ amount: 100000, message: "Bạn nhận được 100.000 VNĐ", img: "img/100nghin.jpg" }),
-        ...Array(4).fill({ amount: 0, message: "Bạn nhận được tràn pháo tay", img: "" })
+        ...Array(5).fill({
+            amount: 20000,
+            message: "Bạn nhận được 20.000 VNĐ",
+            img: "img/20nghin.png"
+        }),
+        ...Array(6).fill({
+            amount: 30000,
+            message: "Bạn nhận được 30.000 VNĐ",
+            img: ["img/10nghin.jpg", "img/20nghin.png"]
+        }),
+        ...Array(8).fill({
+            amount: 50000,
+            message: "Bạn nhận được 50.000 VNĐ",
+            img: "img/50nghin.jpg"
+        }),
+        ...Array(3).fill({
+            amount: 100000,
+            message: "Bạn nhận được 100.000 VNĐ",
+            img: "img/100nghin.jpg"
+        }),
+        ...Array(4).fill({
+            amount: 0,
+            message: "Bạn nhận được tràn pháo tay",
+            img: ""
+        })
     ];
 
     // Shuffle prizes array
@@ -269,7 +369,9 @@
                 // Xóa thông báo sau khi người dùng bấm vào màn hình
                 document.body.addEventListener('click', () => {
                     document.body.removeChild(clapElement);
-                }, { once: true });
+                }, {
+                    once: true
+                });
             } else if (Array.isArray(prize.img)) {
                 console.log('Displaying two images for 30 nghìn:', prize.img);
                 var imgElement1 = document.createElement("img");
@@ -304,7 +406,9 @@
                 document.body.addEventListener('click', () => {
                     document.body.removeChild(imgElement1);
                     document.body.removeChild(imgElement2);
-                }, { once: true });
+                }, {
+                    once: true
+                });
             } else {
                 console.log('Displaying one image for amount:', prize.amount);
                 var imgElement = document.createElement("img");
@@ -327,7 +431,9 @@
                 // Xóa hình sau khi người dùng bấm vào màn hình
                 document.body.addEventListener('click', () => {
                     document.body.removeChild(imgElement);
-                }, { once: true });
+                }, {
+                    once: true
+                });
             }
 
             // Decrease the number of spins left
