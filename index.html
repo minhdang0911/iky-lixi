@@ -390,42 +390,60 @@
         console.log('Prize:', prize); // Log the prize details for debugging
         tongtienlixi += prize.amount;
         demnhantien++;
-        lichsulixi += "Người " + demnhantien + " : " + prize.message + "<br/>";
+        lichsulixi += "Người " + demnhantien + " : " + formatCurrency(prize.amount) + "<br/>";
         document.getElementById("sotiendalixi").innerHTML = formatCurrency(tongtienlixi);
         document.getElementById("lichsulixi").innerHTML = lichsulixi;
     
         var randomChucTet = chucTet[Math.floor(Math.random() * chucTet.length)];
-        lichsulixi += randomChucTet + "<br/>";
         
         setTimeout(() => {
             hideClapElement();
             if (Array.isArray(prize.img)) {
                 Swal.fire({
-                    title: "<h3 style='color:white'>" + prize.message + "</h3>",
-                    html: "<h3 style='color:white'>" + randomChucTet + "</h3><br/>" +
-                          "<img src='" + prize.img[0] + "' style='width: 100px; height: 50px; margin-right: 10px;'/>" +
-                          "<img src='" + prize.img[1] + "' style='width: 100px; height: 50px;'/>",
+                    title: prize.message,
+                    html: `
+                        <h3 style='color:white; margin-bottom: 10px;'>${randomChucTet}</h3>
+                        <div style='display: flex; justify-content: center;'>
+                            <img src='${prize.img[0]}' style='width: 120px; height: 60px; margin-right: 5px;'/>
+                            <img src='${prize.img[1]}' style='width: 120px; height: 60px;'/>
+                        </div>
+                    `,
                     background: "#CD3333",
+                    color: "#FFFFFF",
+                    confirmButtonColor: "#3085d6",
+                    padding: "1rem",
+                    customClass: {
+                        popup: 'swal2-custom',
+                        title: 'swal2-title-custom',
+                        htmlContainer: 'swal2-html-custom'
+                    },
                     didClose: () => {
                         showClapElement();
                     }
                 });
             } else {
                 Swal.fire({
-                    title: "<h3 style='color:white'>" + prize.message + "</h3>",
-                    html: "<h3 style='color:white'>" + randomChucTet + "</h3>",
+                    title: prize.message,
+                    html: `<h3 style='color:white;'>${randomChucTet}</h3>`,
                     imageUrl: prize.img ? prize.img : "img/phaotay.webp",
                     imageWidth: 400,
                     imageHeight: 200,
                     imageAlt: "Custom image",
                     background: "#CD3333",
+                    color: "#FFFFFF",
+                    confirmButtonColor: "#3085d6",
+                    padding: "1rem",
+                    customClass: {
+                        popup: 'swal2-custom',
+                        title: 'swal2-title-custom',
+                        htmlContainer: 'swal2-html-custom'
+                    },
                     didClose: () => {
                         showClapElement();
                     }
                 });
             }
-        }, 4000);  
-    
+        }, 4000); 
         if (prize.amount === 0) {
             votay.play();
             var clapElement = document.createElement("div");
@@ -518,6 +536,23 @@
         });
     }
     }
+
+    // Custom CSS for SweetAlert2
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = `
+        .swal2-custom {
+            border-radius: 10px !important;
+        }
+        .swal2-title-custom {
+            font-size: 1.2rem !important;
+            margin-bottom: 5px !important;
+        }
+        .swal2-html-custom {
+            font-size: 1rem !important;
+        }
+    `;
+    document.head.appendChild(styleElement);
+
     function handleMusic() {
         const musicBtn = document.querySelector('.music-toggle');
         const audio = document.getElementById('bgMusic');
