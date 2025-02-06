@@ -101,20 +101,21 @@
                 animation-delay: 3s; /* Bắt đầu mờ dần sau 3 giây */
             }
             @keyframes moveMoney {
-                0% {
-                    opacity: 0;
-                    transform: translate(-50%, 0) rotate(90deg);
-                }
-                50% {
-                    opacity: 1;
-                    transform: translate(-50%, -180px) rotate(90deg); /* Điều chỉnh vị trí */
-                }
-                100% {
-                    transform: translate(-50%, -250px) rotate(810deg); /* Điều chỉnh độ cao */
-                }
-            }
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -200px) rotate(90deg); /* Đưa lên cao hơn */
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -250px) rotate(90deg); /* Điều chỉnh vị trí */
+    }
+    100% {
+        transform: translate(-50%, -280px) rotate(810deg); /* Điều chỉnh độ cao */
+    }
+}
+
             .clap-message {
-                animation: moveMoney 3s forwards;
+                animation: moveMoney 5s forwards;
             }
             .music-toggle {
                 position: fixed;
@@ -203,7 +204,7 @@
             <div class="after"></div>
         </div>
         <div class="topheader">
-            <img class="responsive" id="myImg" onclick="changeSetting()" style="z-index: 99; top: 50px; height: 130px; width: 150px;" src="https://qms-admin.iky.vn/static/img/photos/iky-02.png" />
+            <img class="responsive" id="myImg" onclick="changeSetting()" style="z-index: 99; top: 50px; height: 130px; width: 150px;" src="./img/logo iky.png" />
             <img
                 class="responsive"
                 id="myImg"
@@ -238,8 +239,14 @@
         <audio id="votay">
             <source src="sound/votay.mp3" type="audio/mpeg" />
         </audio>
+        <audio id="votay-pewpew" >
+            <source src="sound/pew-pew-vo-tay.mp3" type="audio/mp3" />
+        </audio>
         <audio id="matluot">
             <source src="sound/matluot.mp3" type="audio/mpeg" />
+        </audio>
+        <audio id="wow">
+            <source src="sound/rap.mp3" type="audio/mpeg" />
         </audio>
 
         <audio id="chucmung">
@@ -248,6 +255,7 @@
         <audio id="bgMusic" loop>
             <source src="sound/bg.mp3" type="audio/mp3" />
         </audio>
+
         <button class="music-toggle">🔊</button>
     </body>
     <script>
@@ -417,8 +425,8 @@
                             html: `
                             <h3 style='color:white; margin-bottom: 10px;'>${randomChucTet}</h3>
                             <div style='display: flex; justify-content: center;'>
-                                <img src='${prize.img[0]}' style='width: 120px; height: 60px; margin-right: 5px;'/>
-                                <img src='${prize.img[1]}' style='width: 120px; height: 60px;'/>
+                                <img src='${prize.img[0]}' style='width: 150px; height: 80px; margin-right: 5px;'/>
+                                <img src='${prize.img[1]}' style='width: 150px; height: 80px;'/>
                             </div>
                         `,
                             background: "#CD3333",
@@ -474,7 +482,10 @@
                     clapElement.style.borderRadius = "10px";
                     clapElement.innerText = "Một tràng pháo tay!";
                     document.body.appendChild(clapElement);
-                    document.getElementById("votay").play();
+                    const sounds = ["votay", "votay-pewpew"];
+    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+    document.getElementById(randomSound).play();
+
 
                     setTimeout(() => {
                         clapElement.style.transform = "translate(-50%, -200px) rotate(720deg)";
@@ -493,35 +504,40 @@
                     imgElement1.src = prize.img[0];
                     imgElement1.classList.add("money-image", "money-image1");
 
-                    imgElement1.style.width = "400px";
-                    imgElement1.style.height = "120px";
+                    imgElement1.style.width = "245px";
+                    imgElement1.style.height = "77px";
                     imgElement1.style.position = "fixed";
                     imgElement1.style.zIndex = "1000";
-                    imgElement1.style.top = "75%";
-                    imgElement1.style.left = "46%";
+                    imgElement1.style.top = "72%";
+                    imgElement1.style.left = "47%";
                     imgElement1.style.transform = "translate(-50%, 50%)";
                     document.body.appendChild(imgElement1);
 
                     var imgElement2 = document.createElement("img");
                     imgElement2.src = prize.img[1];
                     imgElement2.classList.add("money-image", "money-image2");
-                    imgElement2.style.width = "400px";
-                    imgElement2.style.height = "120px";
+                    imgElement2.style.width = "245px";
+                    imgElement2.style.height = "77px";
                     imgElement2.style.position = "fixed";
                     imgElement2.style.zIndex = "1000";
-                    imgElement2.style.top = "75%";
-                    imgElement2.style.left = "54%";
+                    imgElement2.style.top = "72%";
+                    imgElement2.style.left = "53%";
                     imgElement2.style.transform = "translate(-50%, 50%)";
                     document.body.appendChild(imgElement2);
                     fireConfetti();
-                    document.getElementById("chucmung").play();
+                    const sounds = ["chucmung", "wow"];
+    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+    document.getElementById(randomSound).play();
+                    
 
                     setTimeout(() => {
                         document.body.removeChild(imgElement1);
                         document.body.removeChild(imgElement2);
                     }, 5000);
                 } else {
-                    document.getElementById("chucmung").play();
+                    const sounds = ["chucmung", "wow"];
+    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+    document.getElementById(randomSound).play();
                     console.log("Displaying one image for amount:", prize.amount);
                     var imgElement = document.createElement("img");
                     imgElement.src = prize.img;
@@ -530,7 +546,7 @@
                     imgElement.style.height = "120px";
                     imgElement.style.position = "fixed";
                     imgElement.style.zIndex = "100";
-                    imgElement.style.top = "75%";
+                    imgElement.style.top = "80%";
                     imgElement.style.left = "50%";
                     imgElement.style.transform = "translate(-50%, 50%)";
                     document.body.appendChild(imgElement);
@@ -595,6 +611,12 @@
             });
         }
         handleMusic();
+        document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        openRedEnvelope();
+    }
+});
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </html>
