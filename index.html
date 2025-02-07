@@ -12,6 +12,52 @@
         <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet" />
         <link href="./img/logocompany.png" rel="shortcut icon" type="image/x-icon" />
         <style>
+
+@keyframes moveMai {
+  0% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(10px) rotate(5deg); }
+  100% { transform: translateX(0) rotate(0deg); }
+}
+
+.mai-image {
+  position: absolute;
+  right: 20px; /* Đưa hình sang bên phải */
+  top:350px;
+  width: 200px; /* Thu nhỏ hình */
+  animation: moveMai 1s infinite ease-in-out; /* Hiệu ứng lặp vô hạn */
+}
+
+.mualan{
+    margin-top: -30px;
+}
+
+@keyframes happyJump {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.lixi-image {
+  position: absolute;
+  right: 70px;
+  top: 220px;
+  width: 130px;
+  animation: happyJump 0.5s infinite ease-in-out;
+}
+
+
+
+@keyframes snakeWave {
+  0% { transform: translateX(0) rotate(0deg) scale(1); }
+  25% { transform: translateX(5px) rotate(15deg) scale(1.1); }
+  50% { transform: translateX(10px) rotate(-15deg) scale(1); }
+  75% { transform: translateX(5px) rotate(15deg) scale(0.9); }
+  100% { transform: translateX(0) rotate(0deg) scale(1); }
+}
+
+.responsive3 {
+  animation: snakeWave 2s infinite ease-in-out;
+}
+
             .swal2-html-container {
                 color: aliceblue;
             }
@@ -101,18 +147,18 @@
                 animation-delay: 3s; /* Bắt đầu mờ dần sau 3 giây */
             }
             @keyframes moveMoney {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -200px) rotate(90deg); /* Đưa lên cao hơn */
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -250px) rotate(90deg); /* Điều chỉnh vị trí */
-    }
-    100% {
-        transform: translate(-50%, -280px) rotate(810deg); /* Điều chỉnh độ cao */
-    }
-}
+                0% {
+                    opacity: 0;
+                    transform: translate(-50%, -200px) rotate(90deg); /* Đưa lên cao hơn */
+                }
+                50% {
+                    opacity: 1;
+                    transform: translate(-50%, -250px) rotate(90deg); /* Điều chỉnh vị trí */
+                }
+                100% {
+                    transform: translate(-50%, -280px) rotate(810deg); /* Điều chỉnh độ cao */
+                }
+            }
 
             .clap-message {
                 animation: moveMoney 5s forwards;
@@ -160,6 +206,18 @@
                     height: auto;
                     display: none;
                 }
+
+                .lixi-image{
+                    display: none;
+                }
+
+                .mualan{
+                    display: none;
+                }
+
+                .mai-image{
+                    display: none;
+                }
                 .money-image {
                     left: 47% !important;
                 }
@@ -205,13 +263,7 @@
         </div>
         <div class="topheader">
             <img class="responsive" id="myImg" onclick="changeSetting()" style="z-index: 99; top: 50px; height: 130px; width: 150px;" src="./img/logo iky.png" />
-            <img
-                class="responsive"
-                id="myImg"
-                onclick="changeSetting()"
-                style="z-index: 99; top: 50px; height: 100px;"
-                src="https://img.pikbest.com/png-images/20241002/happy-new-year-2025-banner-black-and-white-background-vector-happy_10923211.png!bw700"
-            />
+            <img class="responsive" id="myImg" style="z-index: 99; top: 50px; height: 100px;" src="https://img.pikbest.com/png-images/20241002/happy-new-year-2025-banner-black-and-white-background-vector-happy_10923211.png!bw700" />
         </div>
         <div id="caidat">
             <img id="popup" src="img/popup.jpg" />
@@ -232,6 +284,7 @@
         </div>
         <img class="responsive2" src="img/hea1.png" />
         <div style="position: fixed; z-index: 99; bottom: -50px; left: 0; width: 100%; height: 500px; background: url(img/bot1.png) repeat-x bottom left;"></div>
+        <img class="mualan" style="width: 250px; height: 250px;" src="img/c1854d39b15a94b3408a3e9567ba8465.gif" />
         <img style="width: 250px; height: 250px;" class="responsive3" src="img/snake.png" />
         <div class="nutcaidat" style="position: fixed; bottom: 0px; left: 20px;" onClick="mopopup()"></div>
         <div style="position: fixed; z-index: 999; top: 37px; left: 20px; text-shadow: 2px 2px 5px #f7ff29; color: #f2f4be;" id="xuatluotquay">Lượt lì xì:</div>
@@ -239,7 +292,7 @@
         <audio id="votay">
             <source src="sound/votay.mp3" type="audio/mpeg" />
         </audio>
-        <audio id="votay-pewpew" >
+        <audio id="votay-pewpew">
             <source src="sound/pew-pew-vo-tay.mp3" type="audio/mp3" />
         </audio>
         <audio id="matluot">
@@ -255,7 +308,8 @@
         <audio id="bgMusic" loop>
             <source src="sound/bg.mp3" type="audio/mp3" />
         </audio>
-
+        <img src="./img/hinhhoamai-removebg-preview.png" class="mai-image" />
+        <img src="./img/lixigift-removebg-preview.png" class="lixi-image" />
         <button class="music-toggle">🔊</button>
     </body>
     <script>
@@ -320,7 +374,7 @@
             "Năm mới mang đến nhiều hy vọng, quyết tâm, tinh thần và mong ước. Chúc bạn có một năm đầy hứa hẹn và trọn vẹn. Happy New Year!",
             "Chúc bạn có: Một bầu trời sức khỏe, 1 biển cả tình thương, 1 đại dương tình bạn, 1 gia đình thịnh vượng",
         ];
- 
+
         function mopopup() {
             document.getElementById("caidat").style.display = "block";
         }
@@ -376,7 +430,7 @@
             redEnvelope.classList.add("shake");
 
             setTimeout(() => {
-                redEnvelope.classList.remove("shake");  
+                redEnvelope.classList.remove("shake");
                 showPopup();
             }, 3000);
         }
@@ -483,9 +537,8 @@
                     clapElement.innerText = "Một tràng pháo tay!";
                     document.body.appendChild(clapElement);
                     const sounds = ["votay", "votay-pewpew"];
-    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-    document.getElementById(randomSound).play();
-
+                    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+                    document.getElementById(randomSound).play();
 
                     setTimeout(() => {
                         clapElement.style.transform = "translate(-50%, -200px) rotate(720deg)";
@@ -526,9 +579,8 @@
                     document.body.appendChild(imgElement2);
                     fireConfetti();
                     const sounds = ["chucmung", "wow"];
-    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-    document.getElementById(randomSound).play();
-                    
+                    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+                    document.getElementById(randomSound).play();
 
                     setTimeout(() => {
                         document.body.removeChild(imgElement1);
@@ -536,8 +588,8 @@
                     }, 5000);
                 } else {
                     const sounds = ["chucmung", "wow"];
-    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-    document.getElementById(randomSound).play();
+                    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+                    document.getElementById(randomSound).play();
                     console.log("Displaying one image for amount:", prize.amount);
                     var imgElement = document.createElement("img");
                     imgElement.src = prize.img;
@@ -612,11 +664,10 @@
         }
         handleMusic();
         document.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        openRedEnvelope();
-    }
-});
-
+            if (event.key === "Enter") {
+                openRedEnvelope();
+            }
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </html>
