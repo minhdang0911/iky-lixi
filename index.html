@@ -305,8 +305,14 @@
         <audio id="chucmung">
             <source src="sound/chuc-mung.mp3" type="audio/mpeg" />
         </audio>
-        <audio id="bgMusic" loop>
+        <audio id="bgMusic"  >
             <source src="sound/bg.mp3" type="audio/mp3" />
+        </audio>
+        <audio id="nhactet1"  >
+            <source src="sound/long phong xum vay.mp3" type="audio/mp3" />
+        </audio>
+        <audio id="nhactet2"  >
+            <source src="sound/MỘT NĂM MỚI BÌNH AN.mp3" type="audio/mp3" />
         </audio>
         <img src="./img/hinhhoamai-removebg-preview.png" class="mai-image" />
         <img src="./img/lixigift-removebg-preview.png" class="lixi-image" />
@@ -641,19 +647,37 @@
         document.head.appendChild(styleElement);
 
         function handleMusic() {
-            const musicBtn = document.querySelector(".music-toggle");
-            const audio = document.getElementById("bgMusic");
+    const musicBtn = document.querySelector(".music-toggle");
+    const audio = document.getElementById("bgMusic");
+    const nhactet1 = document.getElementById("nhactet1");
+    const nhactet2 = document.getElementById("nhactet2");
 
-            musicBtn.addEventListener("click", () => {
-                if (audio.paused) {
-                    audio.play();
-                    musicBtn.textContent = "🔊";
-                } else {
-                    audio.pause();
-                    musicBtn.textContent = "🔈";
-                }
-            });
+    let currentTrack = 0;
+    const tracks = [audio, nhactet1, nhactet2];
+
+    function playNext() {
+        tracks[currentTrack].pause();
+        tracks[currentTrack].currentTime = 0;
+        currentTrack = (currentTrack + 1) % tracks.length; // Chuyển đến bài tiếp theo
+        tracks[currentTrack].play();
+    }
+
+    // Khi 1 bài hát kết thúc thì phát bài tiếp theo
+    tracks.forEach(track => {
+        track.addEventListener("ended", playNext);
+    });
+
+    // Bật/tắt nhạc khi click
+    musicBtn.addEventListener("click", () => {
+        if (tracks[currentTrack].paused) {
+            tracks[currentTrack].play();
+            musicBtn.textContent = "🔊";
+        } else {
+            tracks[currentTrack].pause();
+            musicBtn.textContent = "🔈";
         }
+    });
+}
 
         function fireConfetti() {
             confetti({
